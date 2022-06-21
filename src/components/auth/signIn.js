@@ -3,7 +3,6 @@ import {Link, useHistory} from 'react-router-dom';
 import axios from 'axios';
 
 const SignIn = () => {
-    console.log(111)
     let history = useHistory();
     const [user, setUser] = useState({
         username: "",
