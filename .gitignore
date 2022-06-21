@@ -9,7 +9,8 @@
 /backend-section/rs1
 /backend-section/rs2
 /backend-section/rs3
-
+yarn.lock
+package-lock.json
 # testing
 /coverage
 
