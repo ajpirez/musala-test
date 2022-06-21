@@ -10,7 +10,7 @@ const Estudiante = () => {
     }, []);
 
     const loadUsers = async () => {
-        const result = await axios.get('http://localhost:5000/v1/api/user');
+        const result = await axios.get('user');
         setUsers(result.data.reverse());
     };
 
