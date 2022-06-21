@@ -26,6 +26,10 @@
     {
       "name": "Rol",
       "description": "Everything about rols"
+    },
+    {
+      "name": "Gateway",
+      "description": "Everything about Gateways"
     }
   ],
   "schemes": [
@@ -44,32 +48,19 @@
         "tags": [
           "Auth"
         ],
-        "summary": "Sign In",
+        "summary": "Sign Up",
         "description": "",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "name": "name",
+            "name": "User",
             "in": "body",
             "type": "string",
             "description": "name",
-            "required": true
-          },
-          {
-            "name": "username",
-            "in": "body",
-            "type": "string",
-            "description": "username",
-            "required": true
-          },
-          {
-            "name": "password",
-            "in": "body",
-            "type": "string",
-            "description": "password",
-            "required": true
+            "required": true,
+            "value": "{\"name\": \"\", \"username\":\"\", \"password\":\"\"}"
           }
         ],
         "responses": {
@@ -77,9 +68,7 @@
             "description": "successful operation",
             "schema": {
               "type": "array",
-              "items": {
-                "$ref": "#/definitions/User"
-              }
+              "$ref": "#/definitions/User"
             }
           },
           "400": {
@@ -93,6 +82,7 @@
         "tags": [
           "Auth"
         ],
+        "summary": "Sign In",
         "security": [
           {
             "basicAuth": []
@@ -103,9 +93,7 @@
             "description": "successful operation",
             "schema": {
               "type": "array",
-              "items": {
-                "$ref": "#/definitions/User"
-              }
+              "$ref": "#/definitions/User"
             }
           },
           "400": {
@@ -182,9 +170,7 @@
             "description": "successful operation",
             "schema": {
               "type": "array",
-              "items": {
-                "$ref": "#/definitions/User"
-              }
+              "$ref": "#/definitions/User"
             }
           },
           "400": {
@@ -231,9 +217,7 @@
             "description": "successful operation",
             "schema": {
               "type": "array",
-              "items": {
-                "$ref": "#/definitions/User"
-              }
+              "$ref": "#/definitions/User"
             }
           },
           "400": {
@@ -272,9 +256,7 @@
             "description": "successful operation",
             "schema": {
               "type": "array",
-              "items": {
-                "$ref": "#/definitions/User"
-              }
+              "$ref": "#/definitions/User"
             }
           },
           "400": {
@@ -351,9 +333,7 @@
             "description": "successful operation",
             "schema": {
               "type": "array",
-              "items": {
-                "$ref": "#/definitions/Rol"
-              }
+              "$ref": "#/definitions/Rol"
             }
           },
           "400": {
@@ -395,9 +375,7 @@
             "description": "successful operation",
             "schema": {
               "type": "array",
-              "items": {
-                "$ref": "#/definitions/User"
-              }
+              "$ref": "#/definitions/User"
             }
           },
           "400": {
@@ -439,9 +417,340 @@
             "description": "successful operation",
             "schema": {
               "type": "array",
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid tag value"
+          }
+        }
+      }
+    },
+    "/gateway": {
+      "get": {
+        "tags": [
+          "Gateway"
+        ],
+        "summary": "Finds All the Gateways",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
               "items": {
-                "$ref": "#/definitions/User"
+                "$ref": "#/definitions/Gateway"
               }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Gateway"
+        ],
+        "summary": "Save a Gateway",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Gateway",
+            "in": "body",
+            "type": "string",
+            "description": "Add a gateway",
+            "required": true,
+            "value": "{\"serialNumber\": \"\", \"name\":\"\", \"address\":\"\"}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/Gateway"
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/gateway/{id}": {
+      "get": {
+        "tags": [
+          "Gateway"
+        ],
+        "summary": "Find one gateway",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Gateway Id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/Gateway"
+            }
+          },
+          "400": {
+            "description": "Invalid tag value"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Gateway"
+        ],
+        "summary": "Update one gateway",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Gateway Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header fOr JWT",
+            "required": true,
+            "type": "string",
+            "value": "Bearer "
+          },
+          {
+            "name": "Gateway",
+            "in": "body",
+            "type": "string",
+            "description": "Change username and password for your data",
+            "required": true,
+            "value": "{\"serialNumber\": \"\", \"name\":\"\", \"address\":\"\"}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            }
+          },
+          "400": {
+            "description": "Invalid tag value"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Gateway"
+        ],
+        "summary": "Delete one gateway",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Gateway Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization token with admin role",
+            "required": true,
+            "type": "string",
+            "value": "Bearer "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/Gateway"
+            }
+          },
+          "400": {
+            "description": "Invalid tag value"
+          }
+        }
+      }
+    },
+    "/device": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "Finds All the Devices",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Devices"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/device/{id}": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "Find one device ",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Device Id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/Devices"
+            }
+          },
+          "400": {
+            "description": "Invalid tag value"
+          }
+        }
+      }
+    },
+    "/device/addDeviceToGateway/{id}": {
+      "patch": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "Add a device to a gateway",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Gateway Id",
+            "required": true
+          },
+          {
+            "name": "Device",
+            "in": "body",
+            "type": "string",
+            "description": "Device to add",
+            "required": true,
+            "value": "{\"uid\": \"\", \"vendor\":\"\",\"status\":\"\"}"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header with JWT",
+            "required": true,
+            "type": "string",
+            "value": "Bearer "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/Gateway"
+            }
+          },
+          "400": {
+            "description": "Invalid tag value"
+          }
+        }
+      }
+    },
+    "/device/deleteDeviceFromGateway/{id}": {
+      "patch": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "Delete a device from a gateway",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Gateway Id",
+            "required": true
+          },
+          {
+            "name": "Device",
+            "in": "body",
+            "type": "string",
+            "description": "Device to add",
+            "required": true,
+            "value": "{\"deviceId\": \"\"}"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header with JWT",
+            "required": true,
+            "type": "string",
+            "value": "Bearer "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/Gateway"
             }
           },
           "400": {
@@ -481,12 +790,58 @@
         "id": {
           "type": "string"
         },
-        "UserId": {
-          "type": "integer",
-          "format": "int64"
-        },
         "type": {
           "type": "string"
+        },
+        "UserId": {
+          "type": "integer",
+          "format": "int64",
+          "$ref": "#/definitions/User"
+        }
+      }
+    },
+    "Gateway": {
+      "type": "object",
+      "properties": {
+        "devices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Devices"
+          }
+        },
+        "id": {
+          "type": "string"
+        },
+        "serialNumber": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        }
+      }
+    },
+    "Devices": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "number"
+        },
+        "vendor": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "GatewayId": {
+          "type": "integer",
+          "format": "int64",
+          "$ref": "#/definitions/Gateway"
         }
       }
     }
