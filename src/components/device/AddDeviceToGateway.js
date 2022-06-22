@@ -16,7 +16,7 @@ const AddDeviceToGateway = () => {
     }
     const onSubmit = async (e) => {
         e.preventDefault();
-        await axios.patch(`http://localhost:5000/v1/api/device/addDeviceToGateway/${GatewayId}`, devices);
+        await axios.patch(`${process.env.REACT_APP_URL}device/addDeviceToGateway/${GatewayId}`, devices);
         history.push(`/gateway/device/${GatewayId}`)
     }
 

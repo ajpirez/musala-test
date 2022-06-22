@@ -22,7 +22,7 @@ const User = () => {
 
     const deleteUser = async (id) => {
         console.log(id)
-        await axios.delete(`http://localhost:5000/v1/api/user/${id}`)
+        await axios.delete(`${process.env.REACT_APP_URL}/${id}`)
         await loadUsers()
 
     };
@@ -30,7 +30,6 @@ const User = () => {
     return (
         <div className="container">
             <div className="py-4">
-                <h1>Users {process.env.REACT_APP_URL}</h1>
                 <table className="table border shadow">
                     <thead className="thead-light">
                     <tr>

@@ -16,7 +16,7 @@ const SignIn = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         const base64EncodedPw = btoa(user.username + ':' + user.password);
-        await axios.post('http://localhost:5000/v1/api/auth/signin', user, {
+        await axios.post(`${process.env.REACT_APP_URL}auth/signin`, user, {
             headers: {
                 'content-type': 'application/json',
                 'Authorization': 'Basic ' + base64EncodedPw,

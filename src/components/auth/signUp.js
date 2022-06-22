@@ -17,7 +17,7 @@ const SignUp = () => {
     }
     const onSubmit = async (e) => {
         e.preventDefault();
-        await axios.post('http://localhost:5000/v1/api/auth/signup', user)
+        await axios.post(`${process.env.REACT_APP_URL}auth/signup`, user)
             .then(res => {
                 history.push('/gateway')
             }).catch(error => {
