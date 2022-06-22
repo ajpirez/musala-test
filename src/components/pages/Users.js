@@ -12,7 +12,7 @@ const User = () => {
     }, [token]);
 
     const loadUsers = async () => {
-        await axios.get(`http://localhost:5000/v1/api/user`)
+        await axios.get(`${process.env.REACT_APP_URL}user`)
             .then(data => {
                 setUsers(data.data.reverse());
             }).catch(error => {
