@@ -34,7 +34,7 @@ let user = [
     }),
     new User({
         name: 'Cliente',
-        username: 'cliente1',
+        username: 'cliente',
         password: '123456',
     })
 ]

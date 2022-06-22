@@ -30,7 +30,6 @@ const User = () => {
     return (
         <div className="container">
             <div className="py-4">
-                <h1>Users {process.env.REACT_APP_URL}</h1>
                 <table className="table border shadow">
                     <thead className="thead-light">
                     <tr>
