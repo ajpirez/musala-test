@@ -24,7 +24,7 @@ const ShowUser = () => {
 
     return (
         <div className="container">
-            <Link className="btn btn-primary mt-2 ml-2" to="/estudiantes">
+            <Link className="btn btn-primary mt-2 ml-2" to={`/users`}>
                 back
             </Link>
             <hr/>

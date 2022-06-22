@@ -16,8 +16,8 @@ const Gateway = () => {
     };
 
     const deleteGateway = async (id) => {
-        let data = await axios.delete(`http://localhost:5000/v1/api/gateway/${id}`)
-        console.log(data)
+        await axios.delete(`http://localhost:5000/v1/api/gateway/${id}`)
+        loadGateways()
     };
 
     return (
@@ -41,7 +41,7 @@ const Gateway = () => {
                             <tr>
                                 <th scoped="row">{index + 1}</th>
                                 <td><Link className="nav-link" aria-current="page" exact
-                                             to={`/gateway/device/${gateway._id}/${gateway.serialNumber}`}>{gateway.serialNumber}</Link>
+                                          to={`/gateway/device/${gateway._id}`}>{gateway.serialNumber}</Link>
                                 </td>
                                 <td>{gateway.name}</td>
                                 <td>{gateway.address}</td>
@@ -61,7 +61,7 @@ const Gateway = () => {
 
                                     <span className="d-inline-block" tabIndex="0" data-bs-toggle="tooltip"
                                           title="Delete">
-                                       <Link class="btn btn-danger"
+                                       <Link to={'#'} class="btn btn-danger"
                                              onClick={() => deleteGateway(gateway._id)}>
                                         <i className="fa fa-book"></i>
                                     </Link>

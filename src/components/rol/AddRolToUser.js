@@ -28,7 +28,7 @@ const AddRolToUser = () => {
     const {type, UserId} = rol;
     return (
         <div className="container">
-            <Link className="btn btn-primary mt-2 ml-2" to="/user">
+            <Link className="btn btn-primary mt-2 ml-2" to="/users">
                 Volver
             </Link>
             <div className="w-75 mx-auto shadow p-5">

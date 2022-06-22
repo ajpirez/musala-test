@@ -8,10 +8,7 @@ const SignIn = () => {
         username: "",
         password: "",
     });
-    useEffect(() => {
-        // loadCiudades();
-        // loadGrupos();
-    }, []);
+
 
     const onInputChange = e => {
         setUser({...user, [e.target.name]: e.target.value})
@@ -19,22 +16,15 @@ const SignIn = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         const base64EncodedPw = btoa(user.username + ':' + user.password);
-        // const httpOptions = {
-        //   headers: new HttpHeaders({
-        //     'Content-Type': 'application/json',
-        //     'Authorization': 'Basic ' + base64EncodedPw,
-        //   }),
-        // };
         await axios.post('http://localhost:5000/v1/api/auth/signin', user, {
             headers: {
                 'content-type': 'application/json',
                 'Authorization': 'Basic ' + base64EncodedPw,
             }
-        }).then(res =>{
-            console.log(res.data.token)
+        }).then(res => {
             localStorage.setItem('token', res.data.token)
-            history.push('/gateway')
-        }).catch(error=>{
+            window.location.reload()
+        }).catch(error => {
             history.push('/signIn')
         })
     }

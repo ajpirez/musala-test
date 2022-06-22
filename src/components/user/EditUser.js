@@ -31,7 +31,7 @@ const EditUser = () => {
     const {name, username, password} = user;
     return (
         <div className="container">
-            <Link className="btn btn-primary mt-2 ml-2" to="/estudiantes">
+            <Link className="btn btn-primary mt-2 ml-2" to="/users">
                 Volver
             </Link>
             <div className="w-75 mx-auto shadow p-5">

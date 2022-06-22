@@ -9,10 +9,8 @@ const SignUp = () => {
         username: "",
         password: "",
     });
-    useEffect(() => {
-        // loadCiudades();
-        // loadGrupos();
-    }, []);
+
+
 
     const onInputChange = e => {
         setUser({...user, [e.target.name]: e.target.value})
@@ -21,8 +19,7 @@ const SignUp = () => {
         e.preventDefault();
         await axios.post('http://localhost:5000/v1/api/auth/signup', user)
             .then(res => {
-                console.log(res)
-                history.push('/estudiantes')
+                history.push('/gateway')
             }).catch(error => {
                 console.log(error)
             })

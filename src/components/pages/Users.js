@@ -4,11 +4,12 @@ import axios from 'axios';
 
 
 const User = () => {
+    let token = localStorage.getItem('token');
     let history = useHistory();
     const [users, setUsers] = useState([]);
     useEffect(() => {
         loadUsers();
-    }, []);
+    }, [token]);
 
     const loadUsers = async () => {
         await axios.get(`http://localhost:5000/v1/api/user`)

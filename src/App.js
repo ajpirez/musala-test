@@ -1,6 +1,7 @@
 import React from 'react';
 
-import Users from './components/pages/users';
+
+import Users from './components/pages/Users';
 import SignIn from './components/auth/signIn';
 import SignUp from './components/auth/signUp';
 import Navbar from './components/layout/Navbar';
@@ -9,23 +10,20 @@ import EditUser from "./components/user/EditUser";
 import AddRolToUser from "./components/rol/AddRolToUser";
 import DeleteRolToUser from "./components/rol/DeleteRolToUser";
 
-
-
 import Gateway from './components/pages/Gateway';
 import AddGateway from "./components/gateway/AddGateway";
 import EditGateway from "./components/gateway/EditGateway";
 import ShowGateway from "./components/gateway/ShowGateway";
 
+import Devices from './components/pages/Devices';
+import ShowDevice from "./components/device/showDevice";
+import AddDeviceToGateway from "./components/device/AddDeviceToGateway";
+
 import NotFound from "./components/pages/NotFound";
-
-// import Estudiantes from './components/pages/estudiante';
-// import AddStudent from "./components/estudent/AddStudent";
-// import EditStudent from "./components/estudent/EditStudent";
-// import ShowStudent from "./components/estudent/showStudent";
-
 
 
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import axios from "axios";
 
 
 function App() {
@@ -47,14 +45,11 @@ function App() {
                     <Route exact path="/gateway/show/:id" component={ShowGateway}/>
                     <Route exact path="/gateway/edit/:id" component={EditGateway}/>
 
-                    {/*<Route exact path="/estudiantes" component={Estudiantes}/>*/}
-                    {/*<Route exact path="/students/add" component={AddStudent}/>*/}
-                    {/*<Route exact path="/students/show/:id" component={ShowStudent}/>*/}
-                    {/*<Route exact path="/students/edit/:id" component={EditStudent}/>*/}
 
-                    {/*<Route exact path="/grupos/students/:id/:curso" component={Group_students}/>*/}
+                    <Route exact path="/gateway/device/:GatewayId" component={Devices}/>
+                    <Route exact path="/device/add/:GatewayId" component={AddDeviceToGateway}/>
+                    <Route exact path="/device/show/:id" component={ShowDevice}/>
 
-                    {/*<Route exact path="/" component={Estudiantes}/>*/}
                     <Route component={NotFound}/>
                 </Switch>
             </div>
