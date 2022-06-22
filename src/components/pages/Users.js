@@ -12,7 +12,7 @@ const User = () => {
     }, [token]);
 
     const loadUsers = async () => {
-        await axios.get(`${process.env.REACT_APP_URL}user`)
+        await axios.get(`http://localhost:5000/v1/api/user`)
             .then(data => {
                 setUsers(data.data.reverse());
             }).catch(error => {
@@ -30,6 +30,7 @@ const User = () => {
     return (
         <div className="container">
             <div className="py-4">
+                <h1>Users {process.env.REACT_APP_URL}</h1>
                 <table className="table border shadow">
                     <thead className="thead-light">
                     <tr>
