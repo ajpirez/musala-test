@@ -49,6 +49,7 @@ function App() {
                     <Route exact path="/gateway/device/:GatewayId" component={Devices}/>
                     <Route exact path="/device/add/:GatewayId" component={AddDeviceToGateway}/>
                     <Route exact path="/device/show/:id" component={ShowDevice}/>
+                    <Route exact path="/" component={Gateway}/>
 
                     <Route component={NotFound}/>
                 </Switch>

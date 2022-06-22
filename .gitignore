@@ -13,7 +13,9 @@ yarn.lock
 package-lock.json
 # testing
 /coverage
-
+.env
+.env.development
+.env.production
 # production
 /build
 
