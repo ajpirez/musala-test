@@ -12,7 +12,7 @@ const User = () => {
     }, []);
 
     const loadUsers = async () => {
-        await axios.get( process.env.REACT_APP_URL + `/v1/api/user`)
+        await axios.get( process.env.REACT_APP_URL + `v1/api/user`)
             .then(data => {
                 setUsers(data.data.reverse());
             }).catch(error => {
@@ -22,7 +22,7 @@ const User = () => {
 
     const deleteUser = async (id) => {
         console.log(id)
-        await axios.delete(`${process.env.REACT_APP_URL}/v1/api/${id}`)
+        await axios.delete(`${process.env.REACT_APP_URL}v1/api/${id}`)
         await loadUsers()
 
     };
