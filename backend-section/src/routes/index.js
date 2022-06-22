@@ -19,7 +19,6 @@ module.exports = function ({
                            }) {
     const router = express.Router();
     const apiRoutes = express.Router();
-
     apiRoutes
         .use(express.json())
         .use(cors())
@@ -34,9 +33,11 @@ module.exports = function ({
     apiRoutes.use("/device", DeviceRoutes);
     router.use("/v1/api", apiRoutes);
     router.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+    router.use('/', express.static(__dirname + '/../public'));
 
     router.use(NotFoundMiddleware);
     router.use(ErrorMiddleware);
+
 
     return router;
 };
