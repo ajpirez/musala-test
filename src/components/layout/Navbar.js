@@ -19,15 +19,15 @@ const Navbar = () => {
                                 </NavLink >
                             </li>
                             <li className="nav-item">
-                                <NavLink  className="nav-link" aria-current="page" exact to="/grupos">
-                                    Grupos
+                                <NavLink  className="nav-link" aria-current="page" exact to="/gateway">
+                                    Gateway
                                 </NavLink >
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" exact to="/estudiantes">
-                                    Estudiantes
-                                </Link>
-                            </li>
+                            {/*<li className="nav-item">*/}
+                            {/*    <Link className="nav-link" exact to="/estudiantes">*/}
+                            {/*        Estudiantes*/}
+                            {/*    </Link>*/}
+                            {/*</li>*/}
                         </ul>
                         <ul className="col-2 navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">

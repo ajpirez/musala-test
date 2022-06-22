@@ -5,7 +5,7 @@ module.exports = (schema) => {
         try {
             await schema.validateAsync(req.body);
         } catch (error) {
-            res.send(Boom.badData(error))
+            res.status(400).json(Boom.badData(error))
         }
     }
 }

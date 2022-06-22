@@ -33,9 +33,10 @@ const SignIn = () => {
         }).then(res =>{
             console.log(res.data.token)
             localStorage.setItem('token', res.data.token)
-            history.push('/estudiantes')
+            history.push('/gateway')
+        }).catch(error=>{
+            history.push('/signIn')
         })
-        // history.push('/estudiantes')
     }
 
     const {username, password} = user;

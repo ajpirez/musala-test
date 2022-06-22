@@ -40,5 +40,10 @@ const GatewaySchema = new Schema({
     ]
 });
 
+GatewaySchema.pre('remove', function (next) {
+    this.model('device').deleteMany({GatewayId: this._id}, next);
+    next();
+});
+
 GatewaySchema.plugin(require("mongoose-autopopulate"));
 module.exports = mongoose.model("gateway", GatewaySchema);

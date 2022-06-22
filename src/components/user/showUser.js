@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
-import {Link, useHistory, useParams} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 
 const ShowUser = () => {
-    let history = useHistory();
     const {id} = useParams();
     const [user, setUser] = useState({
         rol: [],
@@ -14,23 +13,14 @@ const ShowUser = () => {
 
     const [rols, setRol] = useState([])
     useEffect(() => {
-        const config = {
-            headers: {
-                Authorization: localStorage.getItem('token')
-            }
-        }
-        loadUser(config);
+        loadUser();
     }, []);
 
-    const loadUser = async (config) => {
-        let result = await axios.get(`http://localhost:5000/v1/api/user/${id}`, config)
+    const loadUser = async () => {
+        let result = await axios.get(`http://localhost:5000/v1/api/user/${id}`)
         setUser(result.data);
         setRol(result.data.rols);
     };
-    // const loadRol = async () => {
-    //     let result = await axios.get(`http://localhost:5000/v1/api/user/${id}`)
-    //     setRol(result.data.rols);
-    // };
 
     return (
         <div className="container">
@@ -53,7 +43,8 @@ const ShowUser = () => {
                             <td>
                                     <span className="d-inline-block" tabIndex="0" data-bs-toggle="tooltip"
                                           title="Add Rol To User">
-                                    <Link class="btn btn-primary mr-2" to={`/rol/addRolToUser/${user.username}/${rol._id}`}>
+                                    <Link class="btn btn-primary mr-2"
+                                          to={`/rol/addRolToUser/${user.username}/${rol._id}`}>
                                         <i className="fa fa-book"></i>
                                     </Link>
                                     </span>

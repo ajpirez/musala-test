@@ -1,22 +1,29 @@
 import React, {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, NavLink, useHistory} from 'react-router-dom';
 import axios from 'axios';
 
 
-const Estudiante = () => {
+const User = () => {
+    let history = useHistory();
     const [users, setUsers] = useState([]);
     useEffect(() => {
         loadUsers();
     }, []);
 
     const loadUsers = async () => {
-        const result = await axios.get('user');
-        setUsers(result.data.reverse());
+        await axios.get(`http://localhost:5000/v1/api/user`)
+            .then(data => {
+                setUsers(data.data.reverse());
+            }).catch(error => {
+                history.push('/users')
+            })
     };
 
     const deleteUser = async (id) => {
-        await axios.delete(`http://localhost:5000/v1/api/user/${id}`);
-        loadUsers();
+        console.log(id)
+        await axios.delete(`http://localhost:5000/v1/api/user/${id}`)
+        await loadUsers()
+
     };
 
     return (
@@ -53,13 +60,16 @@ const Estudiante = () => {
                                         <i className="fa fa-book"></i>
                                     </Link>
                                     </span>
+                                    {user.username !== 'admin' &&
                                     <span className="d-inline-block" tabIndex="0" data-bs-toggle="tooltip"
                                           title="Delete user">
-                                    <Link class="btn btn-danger"
-                                          onClick={() => deleteUser(user._id)}>
+                                    <NavLink to={'#'} class="btn btn-danger"
+                                             onClick={() => deleteUser(user._id)}>
                                         <i className="fa fa-book"></i>
-                                    </Link>
+                                    </NavLink>
                                     </span>
+                                    }
+
                                 </td>
                             </tr>
                         ))
@@ -71,4 +81,4 @@ const Estudiante = () => {
     )
 };
 
-export default Estudiante;
+export default User;
