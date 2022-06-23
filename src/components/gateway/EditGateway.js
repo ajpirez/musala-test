@@ -4,6 +4,8 @@ import axios from 'axios';
 
 const EditGateway = () => {
     let history = useHistory();
+    const [error, setError] = useState(<div/>)
+
     const {id} = useParams();
     const [gateway, setGateway] = useState({
         serialNumber: "",
@@ -16,7 +18,7 @@ const EditGateway = () => {
     }, []);
 
     const loadGateway = async () => {
-        const result = await axios.get(`http://localhost:5000/v1/api/gateway/${id}`);
+        const result = await axios.get(`${process.env.REACT_APP_URL}v1/api/gateway/${id}`);
         setGateway(result.data);
     };
 
@@ -25,12 +27,24 @@ const EditGateway = () => {
     };
     const onSubmit = async (e) => {
         e.preventDefault();
-        await axios.patch(`http://localhost:5000/v1/api/gateway/${id}`, {
+        await axios.patch(`${process.env.REACT_APP_URL}v1/api/gateway/${id}`, {
             serialNumber: gateway.serialNumber,
             name: gateway.name,
             address: gateway.address
-        });
-        history.push('/gateway')
+        }).then(() => {
+            history.push('/gateway')
+
+        })
+            .catch(()=>{
+                setTimeout(() => {
+                    setError(<div className="alert alert-danger miAlert" role="alert">
+                        Error validation
+                    </div>)
+                }, 1000)
+                setTimeout(() => {
+                    setError(<div></div>)
+                }, 5000)
+            })
     };
 
 
@@ -76,6 +90,7 @@ const EditGateway = () => {
                     <button className="btn btn-warning btn-block">Edit Gateway</button>
                 </form>
             </div>
+            {error}
         </div>
     )
 };

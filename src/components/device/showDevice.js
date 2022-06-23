@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
-import {Link, useHistory, useParams} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 
 const ShowDevice = () => {
-    let history = useHistory();
     const {id} = useParams();
     const [devices, setDevice] = useState({
         uid: "",
@@ -16,7 +15,7 @@ const ShowDevice = () => {
     }, []);
 
     const loadDevice = async ()=>{
-       const result = await axios.get(`http://localhost:5000/v1/api/device/${id}`);
+       const result = await axios.get(`${process.env.REACT_APP_URL}v1/api/device/${id}`);
         setDevice(result.data);
     };
 

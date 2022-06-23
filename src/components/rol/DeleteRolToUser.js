@@ -16,7 +16,7 @@ const DeleteRolToUser = () => {
     }
     const onSubmit = async (e) => {
         e.preventDefault();
-        await axios.patch('http://localhost:5000/v1/api/rol/deleteRolToUser', {username, rolName: rol.type})
+        await axios.patch(`${process.env.REACT_APP_URL}v1/api/rol/deleteRolToUser`, {username, rolName: rol.type})
             .then(res=>{
                 history.push('/estudiantes')
 
@@ -25,11 +25,11 @@ const DeleteRolToUser = () => {
             })
     }
 
-    const {type, UserId} = rol;
+    const {type} = rol;
     return (
         <div className="container">
             <Link className="btn btn-primary mt-2 ml-2" to={`/user/show/${rolId}`}>
-                Volver
+                Back
             </Link>
             <div className="w-75 mx-auto shadow p-5">
                 <h2 className="text-center mb-4">Delete a Rol to user</h2>

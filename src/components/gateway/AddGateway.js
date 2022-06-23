@@ -4,6 +4,8 @@ import axios from 'axios';
 
 const AddGateway = () => {
     let history = useHistory();
+    const [error, setError] = useState(<div/>)
+
     const [gateway, setGateway] = useState({
         serialNumber: "",
         name: "",
@@ -16,8 +18,20 @@ const AddGateway = () => {
     }
     const onSubmit = async (e) => {
         e.preventDefault();
-        await axios.post('http://localhost:5000/v1/api/gateway', gateway);
-        history.push('/gateway')
+        await axios.post(`${process.env.REACT_APP_URL}v1/api/gateway`, gateway)
+            .then(()=>{
+                history.push('/gateway')
+            })
+            .catch(()=>{
+                setTimeout(() => {
+                    setError(<div className="alert alert-danger miAlert" role="alert">
+                        Error validation
+                    </div>)
+                }, 1000)
+                setTimeout(() => {
+                    setError(<div></div>)
+                }, 5000)
+            })
     }
     const {serialNumber, name, address} = gateway;
     return (
@@ -61,6 +75,7 @@ const AddGateway = () => {
                     <button className="btn btn-primary btn-block">Add gateway</button>
                 </form>
             </div>
+            {error}
         </div>
     )
 };

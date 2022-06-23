@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import axios from 'axios';
+import '../../App.css'
 
 const SignIn = () => {
     let history = useHistory();
+    const [error, setError] = useState(<div/>)
     const [user, setUser] = useState({
         username: "",
         password: "",
@@ -16,7 +18,7 @@ const SignIn = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         const base64EncodedPw = btoa(user.username + ':' + user.password);
-        await axios.post(`${process.env.REACT_APP_URL}auth/signin`, user, {
+        await axios.post(`${process.env.REACT_APP_URL}v1/api/auth/signin`, user, {
             headers: {
                 'content-type': 'application/json',
                 'Authorization': 'Basic ' + base64EncodedPw,
@@ -24,8 +26,17 @@ const SignIn = () => {
         }).then(res => {
             localStorage.setItem('token', res.data.token)
             window.location.reload()
+            // window.location.href = `${process.env.REACT_APP_URL}`
         }).catch(error => {
-            history.push('/signIn')
+            setTimeout(()=>{
+                setError(<div className="alert alert-danger miAlert" role="alert">
+                    Sign In Error
+                </div>)
+            },1000)
+
+            setTimeout(()=>{
+                setError(<div></div>)
+            },5000)
         })
     }
 
@@ -60,6 +71,7 @@ const SignIn = () => {
                     <button className="btn btn-primary btn-block">Sign Up</button>
                 </form>
             </div>
+            {error}
         </div>
     )
 };

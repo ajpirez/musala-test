@@ -4,6 +4,7 @@ import axios from 'axios';
 
 const EditUser = () => {
     let history = useHistory();
+    const [error, setError] = useState(<div/>)
     const {id} = useParams();
     const [user, setUser] = useState({
         name: "",
@@ -15,7 +16,7 @@ const EditUser = () => {
     }, []);
 
     const loadUser = async () => {
-        const result = await axios.get(`http://localhost:5000/v1/api/user/${id}`);
+        const result = await axios.get(`${process.env.REACT_APP_URL}v1/api/user/${id}`);
         setUser(result.data);
     };
 
@@ -24,15 +25,32 @@ const EditUser = () => {
     };
     const onSubmit = async (e) => {
         e.preventDefault();
-        await axios.patch(`http://localhost:5000/v1/api/user/${id}`, user);
-        history.push('/users')
+        await axios.patch(`${process.env.REACT_APP_URL}v1/api/user/${id}`, {
+            name: user.name,
+            username: user.username,
+            password: user.password
+        })
+            .then(() => {
+                history.push('/users')
+            })
+            .catch(() => {
+                setTimeout(() => {
+                    setError(<div className="alert alert-danger miAlert" role="alert">
+                        Error validation
+                    </div>)
+                }, 1000)
+
+                setTimeout(() => {
+                    setError(<div></div>)
+                }, 5000)
+            });
     };
 
     const {name, username, password} = user;
     return (
         <div className="container">
-            <Link className="btn btn-primary mt-2 ml-2" to="/users">
-                Volver
+            <Link className="btn btn-primary mt-2 ml-2" to={`/users`}>
+                Back
             </Link>
             <div className="w-75 mx-auto shadow p-5">
                 <h2 className="text-center mb-4">Edit User</h2>
@@ -70,6 +88,7 @@ const EditUser = () => {
                     <button className="btn btn-warning btn-block">Update User</button>
                 </form>
             </div>
+            {error}
         </div>
     )
 };

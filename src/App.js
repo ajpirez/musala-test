@@ -16,14 +16,12 @@ import EditGateway from "./components/gateway/EditGateway";
 import ShowGateway from "./components/gateway/ShowGateway";
 
 import Devices from './components/pages/Devices';
-import ShowDevice from "./components/device/showDevice";
 import AddDeviceToGateway from "./components/device/AddDeviceToGateway";
 
 import NotFound from "./components/pages/NotFound";
 
 
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import axios from "axios";
 
 
 function App() {
@@ -48,7 +46,6 @@ function App() {
 
                     <Route exact path="/gateway/device/:GatewayId" component={Devices}/>
                     <Route exact path="/device/add/:GatewayId" component={AddDeviceToGateway}/>
-                    <Route exact path="/device/show/:id" component={ShowDevice}/>
                     <Route exact path="/" component={Gateway}/>
 
                     <Route component={NotFound}/>

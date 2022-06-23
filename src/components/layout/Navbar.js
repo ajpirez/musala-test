@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {Link, NavLink} from 'react-router-dom';
-import axios from "axios";
-
 
 const Navbar = () => {
     const logout = async () => {
         localStorage.clear()
         window.location.reload()
+        // window.location.href = `${process.env.REACT_APP_URL}`
     };
 
     return (

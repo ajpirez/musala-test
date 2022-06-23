@@ -38,7 +38,7 @@ const {User, Rol, Gateway, Device} = require("../models");
 
 // schemas
 
-const {UserSchema, RolSchema, GatewaySchema, DeviceSchema} = require('../schemas/index')
+const {UserSchema, RolSchema, GatewaySchema, DeviceSchema,GatewayUpdateSchema} = require('../schemas/index')
 
 // repositories
 const {
@@ -89,6 +89,7 @@ container
         RolSchema: asValue(RolSchema),
         GatewaySchema: asValue(GatewaySchema),
         DeviceSchema: asValue(DeviceSchema),
+        GatewayUpdateSchema: asValue(GatewayUpdateSchema),
     })
     .register({
         UserRepository: asClass(UserRepository).singleton(),

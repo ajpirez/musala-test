@@ -4,6 +4,8 @@ import axios from 'axios';
 
 const AddDeviceToGateway = () => {
     let history = useHistory();
+    const [error, setError] = useState(<div/>)
+
     const {GatewayId} = useParams();
     const [devices, setDevice] = useState({
         uid: "",
@@ -16,15 +18,28 @@ const AddDeviceToGateway = () => {
     }
     const onSubmit = async (e) => {
         e.preventDefault();
-        await axios.patch(`${process.env.REACT_APP_URL}device/addDeviceToGateway/${GatewayId}`, devices);
-        history.push(`/gateway/device/${GatewayId}`)
+        await axios.patch(`${process.env.REACT_APP_URL}v1/api/device/addDeviceToGateway/${GatewayId}`, devices)
+            .then(()=>{
+                history.push(`/gateway/device/${GatewayId}`)
+
+            })
+            .catch(()=>{
+                setTimeout(() => {
+                    setError(<div className="alert alert-danger miAlert" role="alert">
+                        Error validation
+                    </div>)
+                }, 1000)
+                setTimeout(() => {
+                    setError(<div></div>)
+                }, 5000)
+            })
     }
 
     const {uid, vendor, status} = devices;
     return (
         <div className="container">
-            <Link className="btn btn-primary mt-2 ml-2" to="/estudiantes">
-                Volver
+            <Link className="btn btn-primary mt-2 ml-2" to="/gateway">
+                Back
             </Link>
             <div className="w-75 mx-auto shadow p-5">
                 <h2 className="text-center mb-4">Add a Device</h2>
@@ -64,6 +79,7 @@ const AddDeviceToGateway = () => {
                     <button className="btn btn-primary btn-block">Add Device</button>
                 </form>
             </div>
+            {error}
         </div>
     )
 };

@@ -33,7 +33,7 @@ module.exports = function ({
     apiRoutes.use("/device", DeviceRoutes);
     router.use("/v1/api", apiRoutes);
     router.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
-    router.use('/', express.static(__dirname + '/../public'));
+    // router.use('/', express.static(__dirname + '/../public'));
 
     router.use(NotFoundMiddleware);
     router.use(ErrorMiddleware);

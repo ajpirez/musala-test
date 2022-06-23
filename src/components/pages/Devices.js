@@ -11,12 +11,13 @@ const Devices = () => {
     }, []);
 
     const loadDevices = async () => {
-        const result = await axios.get('http://localhost:5000/v1/api/device');
+        console.log(GatewayId)
+        const result = await axios.get(`${process.env.REACT_APP_URL}v1/api/device`);
         setDevices(result.data.reverse());
     };
 
     const deleteDeviceFromGateway = async (gatewayId, deviceId) => {
-        await axios.patch(`http://localhost:5000/v1/api/device/deleteDeviceFromGateway/${gatewayId}`, {deviceId});
+        await axios.patch(`${process.env.REACT_APP_URL}v1/api/device/deleteDeviceFromGateway/${GatewayId}`, {deviceId});
         loadDevices();
     };
 
@@ -45,14 +46,8 @@ const Devices = () => {
                                 <td>{device.uid}</td>
                                 <td>{device.vendor}</td>
                                 <td>{device.status}</td>
-                                <td>{device.date}</td>
+                                <td>{device.createdAt.substring(0,10)}</td>
                                 <td>
-                                    <span className="d-inline-block" tabIndex="0" data-bs-toggle="tooltip"
-                                          title="Show Device">
-                                    <Link class="btn btn-primary mr-2" to={`/device/show/${device._id}`}>
-                                        <i className="fa fa-book"></i>
-                                    </Link>
-                                    </span>
                                     <span className="d-inline-block" tabIndex="0" data-bs-toggle="tooltip"
                                           title="Delete Device">
                                     <Link to={'#'} class="btn btn-danger"

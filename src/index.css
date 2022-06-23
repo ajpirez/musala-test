@@ -1,4 +1,4 @@
-.not-Found{
+.not-Found {
     position: fixed;
     top: 0;
     width: 100vw;
@@ -8,3 +8,10 @@
     justify-content: center;
     align-items: center;
 }
+.mi-Alert {
+    position: fixed;
+    background: #0b2e13;
+    bottom: 80%;
+    right: 100%
+}
+

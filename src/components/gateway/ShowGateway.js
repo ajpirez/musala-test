@@ -15,7 +15,7 @@ const ShowGateway = () => {
 
     const loadGateway = async () => {
         console.log(id)
-        const result = await axios.get(`http://localhost:5000/v1/api/gateway/${id}`);
+        const result = await axios.get(`${process.env.REACT_APP_URL}v1/api/gateway/${id}`);
         setGateway(result.data);
         console.log(gateway)
     };

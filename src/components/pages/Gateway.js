@@ -11,12 +11,12 @@ const Gateway = () => {
     }, []);
 
     const loadGateways = async () => {
-        const result = await axios.get('http://localhost:5000/v1/api/gateway');
+        const result = await axios.get(`${process.env.REACT_APP_URL}v1/api/gateway`);
         setGateway(result.data.reverse());
     };
 
     const deleteGateway = async (id) => {
-        await axios.delete(`http://localhost:5000/v1/api/gateway/${id}`)
+        await axios.delete(`${process.env.REACT_APP_URL}v1/api/gateway/${id}`)
         loadGateways()
     };
 

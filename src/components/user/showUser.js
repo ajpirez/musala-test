@@ -17,7 +17,7 @@ const ShowUser = () => {
     }, []);
 
     const loadUser = async () => {
-        let result = await axios.get(`http://localhost:5000/v1/api/user/${id}`)
+        let result = await axios.get(`${process.env.REACT_APP_URL}v1/api/user/${id}`)
         setUser(result.data);
         setRol(result.data.rols);
     };
@@ -25,7 +25,7 @@ const ShowUser = () => {
     return (
         <div className="container">
             <Link className="btn btn-primary mt-2 ml-2" to={`/users`}>
-                back
+                Back
             </Link>
             <hr/>
             <ul className="list-group w-50">
@@ -51,7 +51,7 @@ const ShowUser = () => {
                                 <span className="d-inline-block" tabIndex="0" data-bs-toggle="tooltip"
                                       title="Delete Rol to User">
                                      <Link class="btn btn-danger"
-                                           to={`/rol/addRolToUser/${user.username}/${rol._id}`}>
+                                           to={`/rol/addRolToUser/${user.username}/${rol._id}/${user._id}`}>
                                          <i className="fa fa-book"></i>
                                     </Link>
                                     </span>

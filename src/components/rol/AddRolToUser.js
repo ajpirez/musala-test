@@ -4,7 +4,9 @@ import axios from 'axios';
 
 const AddRolToUser = () => {
     let history = useHistory();
-    const {username,rolId} = useParams();
+    const [error, setError] = useState(<div/>)
+
+    const {username,rolId, userId} = useParams();
 
     const [rol, setRol] = useState({
         type: "",
@@ -16,20 +18,27 @@ const AddRolToUser = () => {
     }
     const onSubmit = async (e) => {
         e.preventDefault();
-        await axios.patch('http://localhost:5000/v1/api/rol/addRolToUser', {username, rolName: rol.type})
+        await axios.patch(`${process.env.REACT_APP_URL}v1/api/rol/addRolToUser`, {username, rolName: rol.type})
             .then(res=>{
-                history.push('/estudiantes')
+                history.push('/users')
 
             }).catch(error =>{
-                history.push('/estudiantes')
+                setTimeout(() => {
+                    setError(<div className="alert alert-danger miAlert" role="alert">
+                        Error validation
+                    </div>)
+                }, 1000)
+                setTimeout(() => {
+                    setError(<div></div>)
+                }, 5000)
             })
     }
 
-    const {type, UserId} = rol;
+    const {type} = rol;
     return (
         <div className="container">
-            <Link className="btn btn-primary mt-2 ml-2" to="/users">
-                Volver
+            <Link className="btn btn-primary mt-2 ml-2" to={"/users"}>
+                Back
             </Link>
             <div className="w-75 mx-auto shadow p-5">
                 <h2 className="text-center mb-4">Add a Rol to user</h2>
@@ -47,7 +56,7 @@ const AddRolToUser = () => {
                         />
                     </div>
                     <div className="form-group">
-                        <select required aria-required="true" required name="type"
+                        <select  aria-required="true"  name="type"
                                 className="form-control form-control-lg"
                                 aria-label="Default select example" value={type} onChange={e => onInputChange(e)}>
                             <option value="">Select a rol</option>
@@ -58,6 +67,7 @@ const AddRolToUser = () => {
                     <button className="btn btn-primary btn-block">Add Rol</button>
                 </form>
             </div>
+            {error}
         </div>
     )
 };

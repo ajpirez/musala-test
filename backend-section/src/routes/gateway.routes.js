@@ -4,12 +4,12 @@ const {AuthMiddleware, RolMiddleware, ParseIntMiddleware, CacheMiddleware, Valid
 const {CACHE_TIME} = require("../helpers");
 
 
-module.exports = function ({GatewayController, GatewaySchema}) {
+module.exports = function ({GatewayController, GatewaySchema,GatewayUpdateSchema}) {
     const router = Router();
     router.get("", /*[ParseIntMiddleware, CacheMiddleware(CACHE_TIME.ONE_MINUTE)],*/ GatewayController.getAll);
     router.get("/:gatewayId", GatewayController.get);
     router.post("/", AuthMiddleware, RolMiddleware.ensureHasRol('Admin'), ValidateData(GatewaySchema), GatewayController.create);
-    router.patch("/:gatewayId", AuthMiddleware, RolMiddleware.ensureHasRol('Admin'), ValidateData(GatewaySchema), GatewayController.update);
+    router.patch("/:gatewayId", AuthMiddleware, RolMiddleware.ensureHasRol('Admin'), ValidateData(GatewayUpdateSchema),GatewayController.update);
     router.delete("/:gatewayId", AuthMiddleware, RolMiddleware.ensureHasRol('Admin'), GatewayController.delete);
     return router;
 };

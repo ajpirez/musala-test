@@ -1,9 +1,9 @@
 const Joi = require('@hapi/joi')
 
 const schema = Joi.object({
-    name: Joi.string().required(),
-    username: Joi.string().required(),
-    password: Joi.string().required(),
+    name: Joi.string().min(3),
+    username: Joi.string().min(3),
+    password: Joi.string().min(3),
     rols: Joi.string()
 })
 

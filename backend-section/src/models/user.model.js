@@ -49,13 +49,7 @@ UserSchema.pre("save", async function (next) {
 });
 
 UserSchema.pre('remove', function (next) {
-    // force validation
-    // if (this.username === "admin") {
-    //     let e = new Error()
-    //     e.status = 400
-    //     e.message = "You can't delete this super user"
-    //
-    // }
+
     this.model('rol').deleteMany({UserId: this._id}, next);
     next();
 });

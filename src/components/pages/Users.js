@@ -4,7 +4,6 @@ import axios from 'axios';
 
 
 const User = () => {
-    let token = localStorage.getItem('token');
     let history = useHistory();
     const [users, setUsers] = useState([]);
     useEffect(() => {
@@ -12,7 +11,7 @@ const User = () => {
     }, []);
 
     const loadUsers = async () => {
-        await axios.get( process.env.REACT_APP_URL + `v1/api/user`)
+        await axios.get(`${process.env.REACT_APP_URL}v1/api/user`)
             .then(data => {
                 setUsers(data.data.reverse());
             }).catch(error => {
@@ -22,7 +21,7 @@ const User = () => {
 
     const deleteUser = async (id) => {
         console.log(id)
-        await axios.delete(`${process.env.REACT_APP_URL}v1/api/${id}`)
+        await axios.delete(`${process.env.REACT_APP_URL}v1/api/user/${id}`)
         await loadUsers()
 
     };
@@ -46,7 +45,10 @@ const User = () => {
                                 <th scoped="row">{index + 1}</th>
                                 <td>{user.name}</td>
                                 <td>{user.username}</td>
+                                {user.username !== 'admin' &&
+
                                 <td>
+
                                     <span className="d-inline-block" tabIndex="0" data-bs-toggle="tooltip"
                                           title="Show user">
                                     <Link class="btn btn-primary mr-2" to={`/user/show/${user._id}`}>
@@ -60,7 +62,6 @@ const User = () => {
                                         <i className="fa fa-book"></i>
                                     </Link>
                                     </span>
-                                    {user.username !== 'admin' &&
                                     <span className="d-inline-block" tabIndex="0" data-bs-toggle="tooltip"
                                           title="Delete user">
                                     <NavLink to={'#'} class="btn btn-danger"
@@ -68,9 +69,10 @@ const User = () => {
                                         <i className="fa fa-book"></i>
                                     </NavLink>
                                     </span>
-                                    }
 
                                 </td>
+                                }
+
                             </tr>
                         ))
                     }
