@@ -26,7 +26,8 @@ const SignIn = () => {
         }).then(res => {
             localStorage.setItem('token', res.data.token)
             window.location.reload()
-            // window.location.href = `${process.env.REACT_APP_URL}`
+            // window.location.href = `
+            // ${process.env.REACT_APP_URL}`
         }).catch(error => {
             setTimeout(()=>{
                 setError(<div className="alert alert-danger miAlert" role="alert">
