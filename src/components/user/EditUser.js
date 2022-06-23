@@ -9,7 +9,6 @@ const EditUser = () => {
     const [user, setUser] = useState({
         name: "",
         username: "",
-        password: "",
     });
     useEffect(() => {
         loadUser();
@@ -18,6 +17,7 @@ const EditUser = () => {
     const loadUser = async () => {
         const result = await axios.get(`${process.env.REACT_APP_URL}v1/api/user/${id}`);
         setUser(result.data);
+        console.log(result.data)
     };
 
     const onInputChange = e => {
@@ -28,7 +28,7 @@ const EditUser = () => {
         await axios.patch(`${process.env.REACT_APP_URL}v1/api/user/${id}`, {
             name: user.name,
             username: user.username,
-            password: user.password
+            // password: user.password
         })
             .then(() => {
                 history.push('/users')
@@ -72,16 +72,6 @@ const EditUser = () => {
                             placeholder="Username"
                             name="username"
                             value={username}
-                            onChange={e => onInputChange(e)}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <input
-                            type="text"
-                            className="form-control form-control-lg"
-                            placeholder="Password"
-                            name="password"
-                            value={password}
                             onChange={e => onInputChange(e)}
                         />
                     </div>

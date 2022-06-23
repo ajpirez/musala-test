@@ -8,7 +8,6 @@ const SignIn = () => {
     const [error, setError] = useState(<div/>)
     const [user, setUser] = useState({
         username: "",
-        password: "",
     });
 
 

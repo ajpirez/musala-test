@@ -51,7 +51,7 @@ const ShowUser = () => {
                                 <span className="d-inline-block" tabIndex="0" data-bs-toggle="tooltip"
                                       title="Delete Rol to User">
                                      <Link class="btn btn-danger"
-                                           to={`/rol/addRolToUser/${user.username}/${rol._id}/${user._id}`}>
+                                           to={`/rol/deleteRolToUser/${user.username}/${rol._id}`}>
                                          <i className="fa fa-book"></i>
                                     </Link>
                                     </span>

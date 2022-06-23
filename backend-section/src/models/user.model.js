@@ -27,7 +27,7 @@ const UserSchema = new Schema({
 
 UserSchema.methods.toJSON = function () {
     let user = this.toObject();
-    delete user.password;
+    // delete user.password;
     return user;
 };
 
@@ -47,12 +47,12 @@ UserSchema.pre("save", async function (next) {
     next();
 });
 
-UserSchema.pre("findOneAndUpdate", async function (next) {
-    const salt = genSaltSync(10);
-    const hashedPassword = hashSync(this._update.password, salt);
-    this._update.password = hashedPassword;
-    next();
-});
+// UserSchema.pre("findOneAndUpdate", async function (next) {
+//     const salt = genSaltSync(10);
+//     const hashedPassword = hashSync(this._update.password, salt);
+//     this._update.password = hashedPassword;
+//     next();
+// });
 
 UserSchema.pre('remove', function (next) {
 

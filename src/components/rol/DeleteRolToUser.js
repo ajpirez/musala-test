@@ -5,6 +5,7 @@ import axios from 'axios';
 const DeleteRolToUser = () => {
     let history = useHistory();
     const {username,rolId} = useParams();
+    const [error, setError] = useState(<div/>)
 
     const [rol, setRol] = useState({
         type: "",
@@ -18,10 +19,18 @@ const DeleteRolToUser = () => {
         e.preventDefault();
         await axios.patch(`${process.env.REACT_APP_URL}v1/api/rol/deleteRolToUser`, {username, rolName: rol.type})
             .then(res=>{
-                history.push('/estudiantes')
+                history.push('/users')
 
             }).catch(error =>{
-                history.push('/estudiantes')
+                setTimeout(()=>{
+                    setError(<div className="alert alert-danger miAlert" role="alert">
+                        Sign In Error
+                    </div>)
+                },1000)
+
+                setTimeout(()=>{
+                    setError(<div></div>)
+                },5000)
             })
     }
 
@@ -58,6 +67,7 @@ const DeleteRolToUser = () => {
                     <button className="btn btn-primary btn-block">Delete rolr</button>
                 </form>
             </div>
+            {error}
         </div>
     )
 };
