@@ -1,4 +1,4 @@
-[[# Getting Started with Create React App
+[[[# Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -141,3 +141,47 @@ This is the swagger documentation
 In the application inside the backend-section there is a test folder in which to implement unit tests with jest to the repositories and services.
 
 I hope you like it)
+](https://app-test-musala.herokuapp.com/
+
+https://app-test-musala.herokuapp.com/api-docs/
+
+
+
+the application has a user registry, it works as follows. There are system users and these have roles, the roles can be Admin or Client, where an administrator can add roles, delete roles, delete gateways, add devices to these etc, while a user with a client role can only see the gateways and the devices associated with them. Security JWT.
+
+the app address is as follows on github ---- https://github.com/ajpirez/musala-test
+
+inside the application you will find you should do the following execute in case of linux
+
+sudo ./create_replic.sh --fork  
+
+or equivalent on windows then 
+
+mongo --port 27018 < init_replic.js
+
+to lift the replicas of mongoDB since it implements transactions in the test for greater security.
+
+You can also find a Dockerfile and another docker-compose file which generates the api with the replicas and the initial configuration of mongo to run our server application in docker
+
+docker-compose up --build
+
+I have developed a very basic application in react for this test in git is the code and you can also access it in a heroku where you make your deployment.
+
+https://app-test-musala.herokuapp.com/
+
+You can access the api documentation from heroku at this route
+
+https://app-test-musala.herokuapp.com/api-docs/
+
+This is the swagger documentation
+
+There are commented paths and files such as cache in requests, etc. I did it to add more things to the project, but then I commented them out because I didn't really need them.
+
+You cannot delete the admin user with admin role from the front only in bd , in case you lose it you can execute the following route
+in this case heroku https://app-test-musala.herokuapp.com/v1/api/auth/seed
+but in your local api it is only to change the address for yours, this generates the seeders and creates two users admin and client with role admin and client respectively.
+
+
+In the application inside the backend-section there is a test folder in which to implement unit tests with jest to the repositories and services.
+
+I hope you like it
