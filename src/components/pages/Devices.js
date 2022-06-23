@@ -12,8 +12,8 @@ const Devices = () => {
 
     const loadDevices = async () => {
         console.log(GatewayId)
-        const result = await axios.get(`${process.env.REACT_APP_URL}v1/api/device`);
-        setDevices(result.data.reverse());
+        const result = await axios.get(`${process.env.REACT_APP_URL}v1/api/gateway/${GatewayId}`);
+        setDevices(result.data.devices);
     };
 
     const deleteDeviceFromGateway = async (gatewayId, deviceId) => {
